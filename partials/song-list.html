@@ -1,0 +1,12 @@
+<div ng-repeat="song in songlist | filter: {artistName: theArtistList.artistName} | filter: {albumName: theAlbumList.albumName}">
+  <div class="media">
+    <div class="media-left media-top">
+      <span class="glyphicon glyphicon-play media-object" aria-hidden="true"></span>
+    </div>
+  <div class="media-body">
+    <button type="button" ng-click="killSong(song)" aria-hidden="close" class="close" id="deleteButton"><span aria-hidden='true'>&times;</span></button>
+    <h3 class="media-heading">{{song.songName | capitalize}}</h3>
+    <p>{{song.artistName}} | {{song.albumName}} | {{song.genre}}</p>
+  </div>
+  </div>
+</div>

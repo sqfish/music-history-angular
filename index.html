@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSS Music History</title>
+  <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css" type="text/css">
+</head>
+<body ng-app="musicHistoryApp">
+  <div class="container" ng-controller="musicCtrl">
+    <div class="row row-eq-height">
+    
+      <div id="left-panel" class="col-xs-12 col-s-3 col-md-3">
+
+        <div class="form-group">
+          <label for="artistFilter" class="col-sm-12 control-label">Artist:</label>
+          <div class="col-sm-11 col-md-offset-1">
+            <select id="artistFilter"
+              ng-model="theArtistList"
+              ng-options="value.artistName for value in songlist | unique: 'artistName' | orderBy: 'artistName'">
+              <option selected disabled>Options</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="albumFilter" class="col-sm-12 control-label">Album:</label>
+          <div class="col-sm-11 col-md-offset-1">
+            <select id="albumFilter"
+              ng-model="theAlbumList"
+              ng-options="value.albumName for value in songlist | unique: 'albumName' | filter: {artistName: theArtistList.artistName}">
+              <option selected disabled>Options</option>
+            </select>
+          </div>
+        </div>
+        <button type="button">Clear Filter</button>
+        <div class="form-group">
+          <a href="#/addsong">Add Song</a>
+        </div>
+
+
+      </div> <!--CLOSE: left-panel -->
+
+      <div id="right-panel" class="col-xs-12 col-s-9 col-md-9 col-md-offset-0">
+        <div ng-view></div>
+        <!-- <div ng-repeat="song in songlist | filter: {artistName: theArtistList.artistName} | filter: {albumName: theAlbumList.albumName}">
+          <div class="media">
+            <div class="media-left media-top">
+              <span class="glyphicon glyphicon-play media-object" aria-hidden="true"></span>
+            </div>
+            <div class="media-body">
+              <button type="button" ng-click="killSong(song)" aria-hidden="close" class="close" id="deleteButton"><span aria-hidden='true'>&times;</span></button>
+              <h3 class="media-heading">{{song.songName | capitalize}}</h3>
+              <p>{{song.artistName}} | {{song.albumName}} | {{song.genre}}</p>
+            </div>
+          </div>
+        </div> -->
+      </div> <!--CLOSE: right-panel -->
+    </div>
+  </div> <!--CLOSE: container -->
+
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/angular/angular.min.js"></script>
+  <script src="lib/bower_components/angular-route/angular-route.js"></script>
+  <script src="lib/bower_components/angular-filter/dist/angular-filter.min.js"></script>
+  <script src="lib/bower_components/firebase/firebase.js"></script>
+  <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
+  <script src="app/app.js"></script>
+<!--   // <script src="app/factories/simple_storage.js"></script>
+  // <script src="app/factories/song_storage.js"></script> -->
+  <script src="app/controllers/songlist.js"></script>
+  <script src="app/controllers/SongListCtrl.js"></script>
+  <script src="app/controllers/AddSongCtrl.js"></script>
+  <script src="app/filters/capitalize.js"></script>
+</body>
+
+</html>
