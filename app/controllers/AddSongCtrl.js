@@ -7,9 +7,11 @@ app.controller("AddSongCtrl", ["$scope", "$q", "$firebaseArray", "$location", fu
     "albumName": "",
     "genre": ""
   };
+  
   $(".genre").click(function(){
     $scope.newSong.genre = $(this).val();
   });
+
   $scope.addSong = function() {
     $scope.songlist.$add(
       $scope.newSong

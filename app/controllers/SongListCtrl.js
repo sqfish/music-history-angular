@@ -3,13 +3,15 @@ app.controller("SongListCtrl", ["$scope", "$q", "$http", "$firebaseArray", funct
   $scope.theArtistList = "";
   $scope.theAlbumList = "";
   $scope.songlist = $firebaseArray(ref);
-  // simple_storage.addJunk("songlist", $scope.songlist);
-
+  $scope.clearFilter = function() {
+    $scope.theArtistList = "";
+    $scope.theAlbumList = "";
+  };
   $scope.killSong = function(song) {
     var songIndex = $scope.songlist.indexOf(song);
-    if (songIndex >= 0) {
-      $scope.songlist.splice(songIndex, 1);
-    }
+    $scope.songlist.$remove(
+      $scope.songlist[(songIndex)]
+    );
   };  
 }
 ]);
