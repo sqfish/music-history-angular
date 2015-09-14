@@ -1,0 +1,17 @@
+<!-- partials/mainlist.html -->
+<div class="col-xs-12 col-sm-7 col-sm-offset-1 col-md-7 col-md-offset-1" id="right-panel">
+  <ul class="media-list">
+    <li class="media" ng-repeat="item in songlist | orderBy:['+artistName', '+songName'] | filter: {$: textSearch} | filter: {artistName: theArtistList.artistName} | filter: {albumName: theAlbumList.albumName}">
+      <div class="media-left media-top">
+        <span class="glyphicon glyphicon-play media-object" aria-hidden="true"></span>
+      </div>
+      <div class="media-body">
+        <button type="button" ng-click="killSong(item)" aria-hidden="close" class="close" id="deleteButton">
+          <span aria-hidden='true'>&times;</span>
+        </button>
+        <h3 class="media-heading">{{item.songName}}</h3>
+        <p>{{item.artistName}} | {{item.albumName}} | {{item.genre}}</p>
+      </div>
+    </li>
+  </ul>
+</div> <!--CLOSE: right-panel -->

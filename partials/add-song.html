@@ -1,26 +1,34 @@
-<form>
-  <div class="form-group">
-    <label for="songName">Song title: </label>
-    <input type="text" id="songName" class="form-control" placeholder="Song Name" ng-model="newSong.songName">
-  </div>
-  <div class="form-group">
-    <label for="artistName">Artist:</label>
-    <input type="text" id="artistName" class="form-control" placeholder="Artist Name" ng-model="newSong.artistName">
-  </div>
-  <div class="form-group">
-    <label for "albumName">Album:</label>
-    <input type="text" id="albumName" class="form-control" placeholder="Album Name" ng-model="newSong.albumName">
-  </div>
-  <div class="form-group">
-    <div class="btn-group" role="group" aria-label="..." ng-model="newSong.genre">
-      <button type="button" class="btn btn-default genre" value="Rock">Rock</button>
-      <button type="button" class="btn btn-default genre" value="Pop">Pop</button>
-      <button type="button" class="btn btn-default genre" value="Blues">Blues</button>
-      <button type="button" class="btn btn-default genre" value="Classical">Classical</button>
-      <button type="button" class="btn btn-default genre" value="Jazz">Jazz</button>
-      <button type="button" class="btn btn-default genre" value="Hip-Hop">Hip-Hop</button>
+<!-- partials/add-song.html -->
+<div class="panels">
+  <form role="form">
+    <div class="form-group">
+      <label for="songName">Song title: </label>
+      <input type="text" id="songName" class="form-control" placeholder="Song Name" ng-model="newSong.songName">
     </div>
-  </div>
-  <button type="button" class="btn btn-default" ng-click="addSong()">Create</button>
-  <button type="button" class="btn btn-default" ng-click="closeAddSong()">Close</button>
-</form>
+    <div class="form-group">
+      <label for="artistName">Artist:</label>
+      <input type="text" id="artistName" class="form-control" placeholder="Artist Name" ng-model="newSong.artistName">
+    </div>
+    <div class="form-group">
+      <label for="albumName">Album:</label>
+      <input type="text" id="albumName" class="form-control" placeholder="Album Name" ng-model="newSong.albumName">
+    </div>
+    <div class="form-group">
+      <label for="year">Year:</label>
+      <input type="number" id="year" class="form-control" placeholder="####" ng-model="newSong.year">
+    </div>
+    <div class="form-group">
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default genre" value="Pop">Pop</button>
+        <button type="button" class="btn btn-default genre" value="Rock">Rock</button>
+        <button type="button" class="btn btn-default genre" value="Hip-Hop">Hip-Hop</button>
+        <button type="button" class="btn btn-default genre" value="Country">Country</button>
+        <button type="button" class="btn btn-default genre" value="EDM">EDM</button>
+        <button type="button" class="btn btn-default genre" value="Alternative">Alternative</button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-default" ng-click="addSong()">Create</button>
+    <button type="button" class="btn btn-default" ng-click="closeAddSong()">Close</button>
+  </form>
+</div>
+<div ui-view></div>

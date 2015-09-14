@@ -1,37 +1,51 @@
-app.controller("AddSongCtrl", ["$scope", "$q", "$firebaseArray", "$location", function($scope, $q, $firebaseArray, $location){
-  var ref = new Firebase("https://music-history-ng.firebaseio.com/songlist");
-  $scope.songlist = $firebaseArray(ref);
-  $scope.newSong = {
-    "songName": "",
-    "artistName": "",
-    "albumName": "",
-    "genre": ""
-  };
-  
-  $(".genre").click(function(){
-    $scope.newSong.genre = $(this).val();
-  });
+var app = angular.module("musicHistoryApp");
+app.controller("AddSongCtrl", [
+  "$scope", 
+  "$firebaseArray", 
+  "$location", 
+  "songlistData", 
+  function($scope, $firebaseArray, $location, songlistData){
+    var data = songlistData;
+    data.$loaded().then(function(){
+      $scope.songlist = data;
+    });
+    $scope.newSong = {
+      "songName": "",
+      "artistName": "",
+      "albumName": "",
+      "year": 0,
+      "genre": ""
+    };
+    $("nav li").removeClass("active");
+    $("#addSongNav").addClass("active");
 
-  $scope.addSong = function() {
-    $scope.songlist.$add(
-      $scope.newSong
-    );
-    $scope.newSong = {
-      "songName": "",
-      "artistName": "",
-      "albumName": "",
-      "genre": ""
+    var genre;
+    $(".genre").click(function(){
+      genre = $(this).val();
+      $scope.newSong.genre = genre;
+    });
+
+    $scope.addSong = function() {
+      $scope.songlist.$add(
+        $scope.newSong
+      );
+      $scope.newSong = {
+        "songName": "",
+        "artistName": "",
+        "albumName": "",
+        "year": 0,
+        "genre": ""
+      };
+    $location.url('/');
     };
-  $location.url('/songs');
-  };
-  $scope.closeAddSong = function() {
-    $scope.newSong = {
-      "songName": "",
-      "artistName": "",
-      "albumName": "",
-      "genre": ""
+    $scope.closeAddSong = function() {
+      $scope.newSong = {
+        "songName": "",
+        "artistName": "",
+        "albumName": "",
+        "year": 0,
+        "genre": ""
+      };
+      $location.url('/');
     };
-    $location.url('/songs');
-  };
-}
-]);
+}]);
