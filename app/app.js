@@ -3,53 +3,42 @@
  * musicHistoryApp
  * Main module of the application.
  */
-angular
-  .module('musicHistoryApp', [
-    'ui.router', 
-    'firebase', 
-    'angular.filter'
-  ])
-  .config(['$stateProvider', '$urlRouterProvider', 
-    function($stateProvider, $urlRouterProvider) {
-      $stateProvider
-        .state('main', {
-          abstract: true,
-          url: '/main',
-          template: '<ui-view/>'
-        })
-        .state('main.side', {
-          url: '',
-          templateUrl: "partials/mainside.html",
-          controller: 'SongListCtrl'
-        })
-        .state('main.side.list', {
-          url: '/list',
-          templateUrl: "partials/mainlist.html"
-        })
-        .state('add-song', {
-          url: '/add',
-          templateUrl: 'partials/add-song.html',
-          controller: 'AddSongCtrl'
-        });
-        $urlRouterProvider.when("", "/main/list");
-        $urlRouterProvider.otherwise("/main/list");
-    }
-  ]);
-// app.controller('MainCtrl', function($state){
-//   $state.transitionTo('main.list.side');
-// })
-// app.factory("songlistData", function($firebaseArray) {
-//   var ref = new Firebase("https://music-history-ng.firebaseio.com/songlist");
-//   console.log($firebaseArray(ref))
-//   return $firebaseArray(ref);
-// });
-// app.directive('songList', function(){
-//   return {
-//     restrict: 'E',
-//     transclude: true,
-//     scope: false,
-//     templateUrl: 'partials/song-list.html',
-//     controllerAs: 'SongListCtrl',
-//     bindToController: true
-//   }
-// });
+define('musicHistoryApp', ['angular', 'angular-ui-router', 'angular-filter', 'controllers/SongListCtrl']);
+define(function(require) {
+  var angular = require('angular');
+  var route = require('angular-ui-router');
+  var filter = require('angular-filter');
+  var list = require('controllers/SongListCtrl');
+  
+  return angular
+    .module('musicHistoryApp', [
+      'ui.router',
+      'angular.filter',
+      'musicHistoryApp.list'
+    ])
+    .config(['$urlRouterProvider', 
+      function($urlRouterProvider) {
+        // $stateProvider
+        //   .state('start', {
+        //     abstract: true,
+        //     url: ''
+        //   });
+        //   .state('main.side', {
+        //     url: '',
+        //     templateUrl: "partials/mainside.html",
+        //     controller: 'SongListCtrl'
+        //   })
+        //   .state('main.side.list', {
+        //     url: '/list',
+        //     templateUrl: "partials/mainlist.html"
+        //   })
+        //   .state('add-song', {
+        //     url: '/add',
+        //     templateUrl: 'partials/add-song.html',
+        //     controller: 'AddSongCtrl'
+        //   });
+          $urlRouterProvider.when("", "/main/list");
+          $urlRouterProvider.when("/main", "/main/list");
+          $urlRouterProvider.otherwise("/main/list");
+    }]);
+});
